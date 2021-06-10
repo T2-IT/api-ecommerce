@@ -13,7 +13,7 @@ public class MailConfig {
 
     public void confirmacaoCadastroCliente(String para, String assunto, String texto) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("");
+        simpleMailMessage.setFrom("tdois.it@gmail.com");
         simpleMailMessage.setTo(para);
         simpleMailMessage.setSubject(assunto);
         simpleMailMessage.setText("");
@@ -22,7 +22,7 @@ public class MailConfig {
 
     public void exclusaoCadastroCliente(String para, String assunto, String texto) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("");
+        simpleMailMessage.setFrom("tdois.it@gmail.com");
         simpleMailMessage.setTo(para);
         simpleMailMessage.setSubject(assunto);
         simpleMailMessage.setText("");
@@ -31,7 +31,7 @@ public class MailConfig {
 
     public void confirmacaoCompra(String para, String assunto, String texto) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("");
+        simpleMailMessage.setFrom("tdois.it@gmail.com");
         simpleMailMessage.setTo(para);
         simpleMailMessage.setSubject(assunto);
         simpleMailMessage.setText("");
