@@ -32,7 +32,7 @@ public class SwaggerConfig {
             .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html")
             .termsOfServiceUrl("/service.html")
             .version("1.0.0")
-            .contact(new Contact("T2.IT", "github.com/T2-IT", "contato@t2.it"))
+            .contact(new Contact("T2.IT", "github.com/T2-IT", "tdois.it@gmail.com"))
             .build();
         return apiInfo;
     }
