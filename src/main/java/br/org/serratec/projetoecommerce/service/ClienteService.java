@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.org.serratec.projetoecommerce.dto.ClienteDTO;
+import br.org.serratec.projetoecommerce.exception.EmailException;
 import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.repository.ClienteRepository;
 
@@ -42,20 +43,28 @@ public class ClienteService {
 	// 	Cliente cliente = clienteRepository.findByEmail(.getEmail());
 
 	// }
-	
-	public boolean buscarCliente(Long id) {
-		if (!clienteRepository.existsById(id)) {
-			return false;
-		}else {
-			return true;
+
+	public Cliente inserir(Cliente user) throws EmailException {
+		Cliente cliente = clienteRepository.findByEmail(user.getEmail());
+		if (cliente != null) {
+			throw new EmailException("Email já cadastrado");
 		}
+		user.setSenha(passwordEncoder.encode(user.getSenha()));
+		return clienteRepository.save(user);
 	}
-	public List<Cliente> listarClientes(){
+	
+	public boolean buscar(Long id) {
+		if (!clienteRepository.existsById(id))
+			return false;
+		else
+			return true;
+	}
+	public List<Cliente> listar(){
 		List<Cliente> clientes = new ArrayList<>();
 		return clientes;
 	}
 	
-	public boolean deletarCliente(Long id) {
+	public boolean excluir(Long id) {
 		if (!clienteRepository.existsById(id)) {
 			return false;
 		}
