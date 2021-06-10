@@ -26,7 +26,7 @@ Aqui estão as tecnologias usadas neste projeto
 
 ## Links
 
-- Repositório: [GitHub](https://github.com/T2-Inc/residencia-api)
+- Repositório: [GitHub]()
 - Documentação da API: [Swagger]()
 
 
