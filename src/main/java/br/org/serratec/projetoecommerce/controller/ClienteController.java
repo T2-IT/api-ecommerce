@@ -1,5 +1,6 @@
 package br.org.serratec.projetoecommerce.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.org.serratec.projetoecommerce.dto.ClienteDTO;
+import br.org.serratec.projetoecommerce.exception.EmailException;
 import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.repository.ClienteRepository;
 import br.org.serratec.projetoecommerce.service.ClienteService;
@@ -43,8 +47,14 @@ public class ClienteController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceçãooo") })
-    public Cliente inserir(@Valid @RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
+    public ResponseEntity<Object>  inserir(@Valid @RequestBody Cliente cliente) {
+        try {
+            cliente = clienteService.inserir(cliente);
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+            return ResponseEntity.created(uri).body(cliente);
+        } catch (EmailException e) {
+            return ResponseEntity.unprocessableEntity().body(e.getMessage());
+        }
     }
 
     @PostMapping("/inserirTodos")
@@ -81,8 +91,8 @@ public class ClienteController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
-    public ResponseEntity<List<Cliente>> listar() {
-        List<Cliente> clientes = clienteRepository.findAll();
+    public ResponseEntity<List<ClienteDTO>> listar() {
+        List<ClienteDTO> clientes = clienteService.listar();
         return ResponseEntity.ok(clientes);
     }
 

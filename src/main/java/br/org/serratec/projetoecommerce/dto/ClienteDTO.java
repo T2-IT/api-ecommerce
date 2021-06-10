@@ -9,7 +9,14 @@ public class ClienteDTO {
 	private String telefone;
 
 	public ClienteDTO() {
-		
+
+	}
+
+	public ClienteDTO(Long id, String email, String nomeCompleto, String telefone) {
+		this.id = id;
+		this.email = email;
+		this.nomeCompleto = nomeCompleto;
+		this.telefone = telefone;
 	}
 
 	public ClienteDTO(Cliente cliente) {

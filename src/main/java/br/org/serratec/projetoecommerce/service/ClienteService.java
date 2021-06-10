@@ -21,29 +21,6 @@ public class ClienteService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	// public UsuarioDTO inserir(UsuarioInserirDTO usuarioInserirDTO) throws EmailException {
-	// 	Usuario u = usuarioRepository.findByEmail(usuarioInserirDTO.getEmail());
-
-	// 	if (u != null) {
-	// 		throw new EmailException("Email existente ! Insira outro");
-	// 	}
-
-	// 	Usuario usuario = new Usuario();
-	// 	usuario.setNome(usuarioInserirDTO.getNome());
-	// 	usuario.setEmail(usuarioInserirDTO.getEmail());
-	// 	usuario.setPerfil("Usuário Padrão");
-	// 	usuario.setSenha(bCryptPasswordEncoder.encode(usuarioInserirDTO.getSenha()));
-	// 	usuario = usuarioRepository.save(usuario);
-	// 	mailConfig.enviarEmail(usuarioInserirDTO.getEmail(), "Cadastro de Usuário!!", usuario.toString());
-	// 	return new UsuarioDTO(usuario);
-
-	// }
-	
-	// public ClienteDTO inserirCliente(ClienteDTO clienteDTO) throws EmailException {
-	// 	Cliente cliente = clienteRepository.findByEmail(.getEmail());
-
-	// }
-
 	public Cliente inserir(Cliente user) throws EmailException {
 		Cliente cliente = clienteRepository.findByEmail(user.getEmail());
 		if (cliente != null) {
@@ -52,18 +29,26 @@ public class ClienteService {
 		user.setSenha(passwordEncoder.encode(user.getSenha()));
 		return clienteRepository.save(user);
 	}
-	
+
 	public boolean buscar(Long id) {
 		if (!clienteRepository.existsById(id))
 			return false;
 		else
 			return true;
 	}
-	public List<Cliente> listar(){
-		List<Cliente> clientes = new ArrayList<>();
-		return clientes;
+
+	public List<ClienteDTO> listar() {
+		List<Cliente> clientes = clienteRepository.findAll();
+		List<ClienteDTO> clientesDTO = new ArrayList<ClienteDTO>();
+
+		for (Cliente cliente : clientes) {
+			ClienteDTO dto = new ClienteDTO();
+			clientesDTO.add(dto);
+		}
+
+		return clientesDTO;
 	}
-	
+
 	public boolean excluir(Long id) {
 		if (!clienteRepository.existsById(id)) {
 			return false;
