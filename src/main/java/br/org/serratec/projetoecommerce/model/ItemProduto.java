@@ -18,7 +18,7 @@ public class ItemProduto {
 	private Double precoVenda;
 	
 	public ItemProduto() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	public ItemProduto(Long id, Integer quantidade, Double precoVenda) {
 		super();

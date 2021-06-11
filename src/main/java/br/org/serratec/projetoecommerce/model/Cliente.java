@@ -1,12 +1,16 @@
 package br.org.serratec.projetoecommerce.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -45,9 +49,11 @@ public class Cliente {
     @Column(name = "data_nasc")
     private LocalDate dataNasc;
 
-    /**
-     * TODO: Fazer o relacionamento das tabelas Endereço e Cliente
-     */
+    @ManyToMany
+    @JoinTable(name = "endereco_cliente",
+            joinColumns = @JoinColumn(name = "id_cliente"),
+            inverseJoinColumns = @JoinColumn(name = "id_endereco"))
+    private List<Endereco> enderecos;
 
     public Cliente() {
     }
