@@ -31,6 +31,7 @@ public class Cliente {
 
     @Column(name = "data_nasc")
     private LocalDate dataNasc;
+    
 
     public Cliente() {
     }

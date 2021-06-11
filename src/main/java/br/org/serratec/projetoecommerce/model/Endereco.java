@@ -10,7 +10,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Endereco {
-    @Id
+    
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco")
     private Long id;

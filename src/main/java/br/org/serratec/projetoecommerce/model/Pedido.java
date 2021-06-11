@@ -17,8 +17,14 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido")
 	private Long id;
+	
+	@Column(name = "data_pedido")
 	private LocalDate dataPedido;
+	
+	@Column(name = "data_entrega")
 	private LocalDate dataEntrega;
+	
+	@Column(name = "data_envio")
 	private LocalDate dataEnvio;
 	
 	@OneToOne
