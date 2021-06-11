@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -47,7 +46,9 @@ public class Endereco {
     /**
      * TODO: Fazer o relacionamento entre as tabelas Cliente e Endereço
      */
-
+   
+  
+    
     public Endereco() {
     }
 
@@ -126,8 +127,11 @@ public class Endereco {
     public void setUf(String uf) {
         this.uf = uf;
     }
+    
+   
+	
 
-    @Override
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

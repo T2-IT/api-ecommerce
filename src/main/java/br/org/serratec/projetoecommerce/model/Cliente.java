@@ -9,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -49,12 +49,13 @@ public class Cliente {
     @Column(name = "data_nasc")
     private LocalDate dataNasc;
 
-    @ManyToMany
-    @JoinTable(name = "endereco_cliente",
-            joinColumns = @JoinColumn(name = "id_cliente"),
-            inverseJoinColumns = @JoinColumn(name = "id_endereco"))
-    private List<Endereco> enderecos;
-
+    @OneToOne
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
+    
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos;
+    
     public Cliente() {
     }
 
@@ -134,8 +135,26 @@ public class Cliente {
     public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
+    
+   
 
-    @Override
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

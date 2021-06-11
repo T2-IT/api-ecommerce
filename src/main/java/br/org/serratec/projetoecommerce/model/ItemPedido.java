@@ -4,9 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-public class ItemProduto {
+@Table(name = "item_pedido")
+public class ItemPedido {
 	
 	@Id
 	@GeneratedValue
@@ -17,10 +22,23 @@ public class ItemProduto {
 	
 	private Double precoVenda;
 	
-	public ItemProduto() {
+	@ManyToOne
+	@JoinColumn(name = "id_produto")
+	private Produto produto;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_pedido")
+	private Pedido pedido;
+	
+	
+	@Transient
+	private Double subTotal;
+	
+	
+	public ItemPedido() {
 		
 	}
-	public ItemProduto(Long id, Integer quantidade, Double precoVenda) {
+	public ItemPedido(Long id, Integer quantidade, Double precoVenda) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
@@ -59,7 +77,7 @@ public class ItemProduto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ItemProduto other = (ItemProduto) obj;
+		ItemPedido other = (ItemPedido) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
