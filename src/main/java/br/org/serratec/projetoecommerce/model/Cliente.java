@@ -7,37 +7,54 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
     private Long id;
 
+    @NotBlank(message = "Digite o e-mail")
+    @Size(max = 30)
     private String email;
 
+    @NotBlank(message = "Digite o nome de usuário. Tamanho máximo: 20 caracteres")
+    @Size(max = 20)
     @Column(name = "nome_usuario")
     private String usuario;
 
+    @NotBlank(message = "Digite seu nome completo. Tamanho máximo: 60 caracteres")
+    @Size(max = 60)
     @Column(name = "nome_completo")
     private String nomeCompleto;
 
+    @NotBlank(message = "Digite a senha")
     private String senha;
 
+    @NotBlank(message = "Digite o CPF sem pontos, traço e espaços")
+    @Size(max = 14)
     private String cpf;
 
+    @Size(max = 11)
     private String telefone;
 
     @Column(name = "data_nasc")
     private LocalDate dataNasc;
-    
+
+    /**
+     * TODO: Fazer o relacionamento das tabelas Endereço e Cliente
+     */
 
     public Cliente() {
     }
 
-    public Cliente(Long id, String email, String usuario, String nomeCompleto, String senha, String cpf,
-            String telefone, LocalDate dataNasc) {
+    public Cliente(Long id, @NotBlank(message = "Digite o e-mail") @Size(max = 30) String email,
+            @NotBlank(message = "Digite o nome de usuário. Tamanho máximo: 20 caracteres") @Size(max = 20) String usuario,
+            String nomeCompleto, String senha, String cpf, String telefone, LocalDate dataNasc) {
         this.id = id;
         this.email = email;
         this.usuario = usuario;
@@ -155,4 +172,5 @@ public class Cliente {
         return true;
     }
 
+    
 }
