@@ -2,10 +2,10 @@ CREATE TABLE endereco (id_endereco SERIAL PRIMARY KEY,
 cep varchar(9) NOT NULL, 
 rua varchar(100) NOT NULL,
 bairro varchar(50) NOT NULL,
-cidade varchar(30),
+cidade varchar(30) NOT NULL,
 numero INTEGER NOT NULL,
 complemento varchar(20),
-estado varchar(2));
+estado varchar(2) NOT NULL);
 
 CREATE TABLE cliente (id_cliente SERIAL PRIMARY KEY,
 email varchar(30) NOT NULL,

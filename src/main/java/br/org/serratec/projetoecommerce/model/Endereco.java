@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-// import javax.persistence.JoinTable;
-// import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Endereco {
@@ -16,25 +16,32 @@ public class Endereco {
     @Column(name = "id_endereco")
     private Long id;
     
+    @NotBlank(message = "Preencha o CEP")
+    @Size(max = 9)
     private String cep;
 
+    @NotBlank(message = "Preencha o logradouro")
+    @Size(max = 100)
     @Column(name = "rua")
     private String logradouro;
 
     private Integer numero;
 
+    @Size(max = 20)
     private String complemento;
 
+    @NotBlank(message = "Preencha o bairro")
+    @Size(max = 50)
     private String bairro;
 
+    @NotBlank(message = "Preencha a cidade")
+    @Size(max = 30)
     private String cidade;
 
+    @NotBlank(message = "Preencha a UF")
+    @Size(max = 2)
     @Column(name = "estado")
     private String uf;
-
-    // @ManyToMany
-    // @JoinTable(name = "")
-    // public Cliente cliente;
 
     public Endereco() {
     }
