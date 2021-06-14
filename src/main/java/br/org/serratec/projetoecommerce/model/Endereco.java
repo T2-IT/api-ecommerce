@@ -16,39 +16,33 @@ public class Endereco {
     @Column(name = "id_endereco")
     private Long id;
     
-    @NotBlank(message = "Preencha o CEP")
-    @Size(max = 9)
+    // @NotBlank(message = "Preencha o CEP")
+    // @Size(max = 9)
     private String cep;
 
-    @NotBlank(message = "Preencha o logradouro")
-    @Size(max = 100)
+    // @NotBlank(message = "Preencha o logradouro")
+    // @Size(max = 100)
     @Column(name = "rua")
     private String logradouro;
 
     private Integer numero;
 
-    @Size(max = 20)
+    // @Size(max = 20)
     private String complemento;
 
-    @NotBlank(message = "Preencha o bairro")
-    @Size(max = 50)
+    // @NotBlank(message = "Preencha o bairro")
+    // @Size(max = 50)
     private String bairro;
 
-    @NotBlank(message = "Preencha a cidade")
-    @Size(max = 30)
+    // @NotBlank(message = "Preencha a cidade")
+    // @Size(max = 30)
     private String cidade;
 
-    @NotBlank(message = "Preencha a UF")
-    @Size(max = 2)
+    // @NotBlank(message = "Preencha a UF")
+    // @Size(max = 2)
     @Column(name = "estado")
     private String uf;
 
-    /**
-     * TODO: Fazer o relacionamento entre as tabelas Cliente e Endereço
-     */
-   
-  
-    
     public Endereco() {
     }
 

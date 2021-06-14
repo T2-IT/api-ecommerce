@@ -1,8 +1,6 @@
 package br.org.serratec.projetoecommerce.controller;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -18,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.org.serratec.projetoecommerce.dto.ClienteDTO;
-import br.org.serratec.projetoecommerce.exception.EmailException;
 import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.repository.ClienteRepository;
 import br.org.serratec.projetoecommerce.service.ClienteService;
@@ -32,10 +28,10 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
-    
+
     @Autowired
     private ClienteService clienteService;
-    
+
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -47,27 +43,24 @@ public class ClienteController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceçãooo") })
-    public ResponseEntity<Object>  inserir(@Valid @RequestBody Cliente cliente) {
-        try {
-            cliente = clienteService.inserir(cliente);
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
-            return ResponseEntity.created(uri).body(cliente);
-        } catch (EmailException e) {
-            return ResponseEntity.unprocessableEntity().body(e.getMessage());
-        }
+    public ResponseEntity<Cliente> inserir(@Valid @RequestBody Cliente cliente) {
+        return clienteService.inserir(cliente);
     }
 
-    @PostMapping("/inserirTodos")
-    @ApiOperation(value = "Insere dados de vários clientes", notes = "Inserir clientes")
-    @ApiResponses(value = { @ApiResponse(code = 201, message = "Clientes cadastrados com sucesso"),
-            @ApiResponse(code = 401, message = "Erro de Autenticação"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
-            @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<Cliente> inserirTodos(List<Cliente> clientes) {
-        return clienteRepository.saveAll(clientes);
-    }
+    // @PostMapping("/inserirTodos")
+    // @ApiOperation(value = "Insere dados de vários clientes", notes = "Inserir
+    // clientes")
+    // @ApiResponses(value = { @ApiResponse(code = 201, message = "Clientes
+    // cadastrados com sucesso"),
+    // @ApiResponse(code = 401, message = "Erro de Autenticação"),
+    // @ApiResponse(code = 403, message = "Você não tem permissão para acessar o
+    // recurso"),
+    // @ApiResponse(code = 404, message = "Recurso não encontrado"),
+    // @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
+    // @ResponseStatus(HttpStatus.CREATED)
+    // public List<Cliente> inserirTodos(List<Cliente> clientes) {
+    // return clienteRepository.saveAll(clientes);
+    // }
 
     @GetMapping("{id}")
     @ApiOperation(value = "Retorna um cliente", notes = "Cliente")
@@ -76,12 +69,8 @@ public class ClienteController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
-    public ResponseEntity<Cliente> buscar(@PathVariable Long id) {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        if (cliente.isPresent()) {
-            return ResponseEntity.ok(cliente.get());
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<ClienteDTO> buscar(@PathVariable Long id) {
+        return clienteService.buscar(id);
     }
 
     @GetMapping
@@ -92,8 +81,7 @@ public class ClienteController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
     public ResponseEntity<List<ClienteDTO>> listar() {
-        List<ClienteDTO> clientes = clienteService.listar();
-        return ResponseEntity.ok(clientes);
+        return clienteService.listar();
     }
 
     @PutMapping("{id}")
@@ -104,12 +92,7 @@ public class ClienteController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
     public ResponseEntity<Cliente> atualizar(@Valid @RequestBody Cliente cliente, @PathVariable Long id) {
-        if (!clienteRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        cliente.setId(id);
-        cliente = clienteRepository.save(cliente);
-        return ResponseEntity.ok(cliente);
+        return clienteService.atualizar(cliente, id);
     }
 
     @DeleteMapping("{id}")
@@ -120,11 +103,7 @@ public class ClienteController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
     public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
-        if (!clienteRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        clienteRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return clienteService.excluir(id);
     }
 
 }

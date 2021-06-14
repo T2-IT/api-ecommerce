@@ -3,6 +3,7 @@ package br.org.serratec.projetoecommerce.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,40 +23,40 @@ public class Cliente {
     @Column(name = "id_cliente")
     private Long id;
 
-    @NotBlank(message = "Digite o e-mail")
+    // @NotBlank(message = "Digite o e-mail")
     @Size(max = 30)
     private String email;
 
-    @NotBlank(message = "Digite o nome de usuário. Tamanho máximo: 20 caracteres")
-    @Size(max = 20)
+    // @NotBlank(message = "Digite o nome de usuário. Tamanho máximo: 20 caracteres")
+    // @Size(max = 20)
     @Column(name = "nome_usuario")
     private String usuario;
 
-    @NotBlank(message = "Digite seu nome completo. Tamanho máximo: 60 caracteres")
-    @Size(max = 60)
+    // @NotBlank(message = "Digite seu nome completo. Tamanho máximo: 60 caracteres")
+    // @Size(max = 60)
     @Column(name = "nome_completo")
     private String nomeCompleto;
 
-    @NotBlank(message = "Digite a senha")
+    // @NotBlank(message = "Digite a senha")
     private String senha;
 
-    @NotBlank(message = "Digite o CPF sem pontos, traço e espaços")
+    // @NotBlank(message = "Digite o CPF sem pontos, traço e espaços")
     @Size(max = 14)
     private String cpf;
 
-    @Size(max = 11)
+    // @Size(max = 11)
     private String telefone;
 
     @Column(name = "data_nasc")
     private LocalDate dataNasc;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
-    
+
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
-    
+
     public Cliente() {
     }
 
@@ -135,26 +136,24 @@ public class Cliente {
     public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
-    
-   
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
 
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 
-	@Override
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -197,5 +196,4 @@ public class Cliente {
         return true;
     }
 
-    
 }

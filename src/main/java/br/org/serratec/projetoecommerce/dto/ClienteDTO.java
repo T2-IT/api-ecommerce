@@ -1,5 +1,7 @@
 package br.org.serratec.projetoecommerce.dto;
 
+import java.util.Optional;
+
 import br.org.serratec.projetoecommerce.model.Cliente;
 
 public class ClienteDTO {

@@ -23,46 +23,32 @@ import br.org.serratec.projetoecommerce.service.EnderecoService;
 @RestController
 @RequestMapping("/enderecos")
 public class EnderecoController {
-	
+
 	@Autowired
-	private EnderecoService enderecoService ;
-	
+	private EnderecoService enderecoService;
+
 	@Autowired
-	private EnderecoRepository enderecoRepository ;
-	
+	private EnderecoRepository enderecoRepository;
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<EnderecoDTO> inserir(@Valid @RequestBody Endereco endereco){
-		EnderecoDTO enderecoDTO= enderecoService.inserir(endereco);
-		return ResponseEntity.ok(enderecoDTO);
+	public EnderecoDTO inserir(@Valid @RequestBody Endereco endereco) {
+		return enderecoService.inserir(endereco);
 	}
+
 	@GetMapping("{cep}")
-	public ResponseEntity<EnderecoDTO> buscar(@PathVariable String cep){
-		EnderecoDTO enderecoDTO = enderecoService.buscar(cep);
-		if (enderecoDTO == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(enderecoDTO);
-		}
+	public EnderecoDTO buscar(@PathVariable String cep) {
+		return enderecoService.buscar(cep);
 	}
-	
+
 	@PutMapping("{id}")
-	public ResponseEntity<Endereco> atualizar(@Valid @RequestBody Endereco endereco,@PathVariable Long id){
-		if (!enderecoRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		endereco.setId(id);
-		endereco= enderecoRepository.save(endereco);
-		return ResponseEntity.ok(endereco);
+	public ResponseEntity<Endereco> atualizar(@Valid @RequestBody Endereco endereco, @PathVariable Long id) {
+		return enderecoService.atualizar(endereco, id);
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> deletar(@PathVariable Long id){
-		if (!enderecoRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		enderecoRepository.deleteById(id);
-		return ResponseEntity.noContent().build();
+	public ResponseEntity<Void> deletar(@PathVariable Long id) {
+		return enderecoService.deletar(id);
 	}
-	
+
 }

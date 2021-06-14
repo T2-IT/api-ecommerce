@@ -2,12 +2,15 @@ package br.org.serratec.projetoecommerce.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.org.serratec.projetoecommerce.dto.ClienteDTO;
+import br.org.serratec.projetoecommerce.exception.ClinteException;
 import br.org.serratec.projetoecommerce.exception.EmailException;
 import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.repository.ClienteRepository;
@@ -21,23 +24,38 @@ public class ClienteService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	public Cliente inserir(Cliente user) throws EmailException {
-		Cliente cliente = clienteRepository.findByEmail(user.getEmail());
-		if (cliente != null) {
-			throw new EmailException("Email já cadastrado");
+	public ResponseEntity<Cliente> inserir(Cliente cliente){
+		Cliente clienteEmail = clienteRepository.findByEmail(cliente.getEmail());
+		Cliente clienteCPF = clienteRepository.findByCpf(cliente.getCpf());
+		
+		try {
+			if (clienteEmail != null)
+				throw new EmailException("E-mail já cadastrado!");
+			
+			if (clienteCPF != null)
+				throw new ClinteException("CPF já cadastrado!");
+				
+			clienteRepository.save(cliente);
+		} catch (ClinteException e) {
+			e.getMessage();
+		} catch (EmailException e) {
+			e.getMessage();
 		}
-		user.setSenha(passwordEncoder.encode(user.getSenha()));
-		return clienteRepository.save(user);
+		return ResponseEntity.ok(cliente);
 	}
 
-	public boolean buscar(Long id) {
-		if (!clienteRepository.existsById(id))
-			return false;
+	public ResponseEntity<ClienteDTO> buscar(Long id) {
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		Cliente cliente1 = cliente.get();
+		ClienteDTO clienteDTO = new ClienteDTO(cliente1);
+		
+		if (cliente.isPresent())
+			return ResponseEntity.ok(clienteDTO);
 		else
-			return true;
+			return null;
 	}
 
-	public List<ClienteDTO> listar() {
+	public ResponseEntity<List<ClienteDTO>> listar() {
 		List<Cliente> clientes = clienteRepository.findAll();
 		List<ClienteDTO> clientesDTO = new ArrayList<ClienteDTO>();
 
@@ -46,15 +64,25 @@ public class ClienteService {
 			clientesDTO.add(dto);
 		}
 
-		return clientesDTO;
+		return ResponseEntity.ok(clientesDTO);
 	}
 
-	public boolean excluir(Long id) {
+	public ResponseEntity<Cliente> atualizar(Cliente cliente, Long id) {
+
+		if (!clienteRepository.existsById(id))
+			return ResponseEntity.notFound().build();
+
+		cliente.setId(id);
+		cliente = clienteRepository.save(cliente);
+		return ResponseEntity.ok(cliente);
+	}
+
+	public ResponseEntity<Void> excluir(Long id) {
 		if (!clienteRepository.existsById(id)) {
-			return false;
+			return ResponseEntity.notFound().build();
 		}
 		clienteRepository.deleteById(id);
-		return true;
+		return ResponseEntity.noContent().build();
 	}
 
 }

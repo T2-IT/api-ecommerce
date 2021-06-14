@@ -3,6 +3,7 @@ package br.org.serratec.projetoecommerce.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,6 +37,23 @@ public class EnderecoService {
 	public EnderecoDTO inserir(Endereco endereco) {
 		endereco = enderecoRepository.save(endereco);
 		return new EnderecoDTO(endereco);
+	}
+
+	public ResponseEntity<Endereco> atualizar(Endereco endereco, Long id) {
+		if (!enderecoRepository.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		endereco.setId(id);
+		endereco = enderecoRepository.save(endereco);
+		return ResponseEntity.ok(endereco);
+	}
+
+	public ResponseEntity<Void> deletar(Long id) {
+		if (!enderecoRepository.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		enderecoRepository.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
