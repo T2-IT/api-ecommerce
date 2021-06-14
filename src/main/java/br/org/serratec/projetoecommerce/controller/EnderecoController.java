@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.serratec.projetoecommerce.dto.EnderecoDTO;
 import br.org.serratec.projetoecommerce.model.Endereco;
 import br.org.serratec.projetoecommerce.repository.EnderecoRepository;
 import br.org.serratec.projetoecommerce.service.EnderecoService;
@@ -27,8 +26,6 @@ public class EnderecoController {
 	@Autowired
 	private EnderecoService enderecoService;
 
-	@Autowired
-	private EnderecoRepository enderecoRepository;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)

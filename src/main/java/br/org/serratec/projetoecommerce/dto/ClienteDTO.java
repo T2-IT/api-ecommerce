@@ -3,22 +3,26 @@ package br.org.serratec.projetoecommerce.dto;
 import java.util.Optional;
 
 import br.org.serratec.projetoecommerce.model.Cliente;
+import br.org.serratec.projetoecommerce.model.Endereco;
 
 public class ClienteDTO {
 	private Long id;
 	private String email;
 	private String nomeCompleto;
 	private String telefone;
+	private Endereco endereco;
 
 	public ClienteDTO() {
 
 	}
 
-	public ClienteDTO(Long id, String email, String nomeCompleto, String telefone) {
+	public ClienteDTO(Long id, String email, String nomeCompleto, String telefone, Endereco endereco) {
+		super();
 		this.id = id;
 		this.email = email;
 		this.nomeCompleto = nomeCompleto;
 		this.telefone = telefone;
+		this.endereco = endereco;
 	}
 
 	public ClienteDTO(Cliente cliente) {
@@ -27,6 +31,15 @@ public class ClienteDTO {
 		this.email = cliente.getEmail();
 		this.nomeCompleto = cliente.getNomeCompleto();
 		this.telefone = cliente.getTelefone();
+		this.endereco = cliente.getEndereco();
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	public Long getId() {

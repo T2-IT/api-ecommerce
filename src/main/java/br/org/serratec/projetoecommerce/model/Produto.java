@@ -26,18 +26,16 @@ public class Produto {
 	private LocalDate dataCadastro;
 	@Column(name = "valor_unitario")
 	private Float valorUnitario;
-	
+	private String url;
 	@OneToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
-	
-	
+
 	@OneToMany(mappedBy = "produto")
 	private List<ItemPedido> itemPedido;
-	
-	
+
 	public Produto(Long id, String nome, String descricao, Integer qtdEstoque, LocalDate dataCadastro,
-			Float valorUnitario, Categoria categoria) {
+			Float valorUnitario, String url, Categoria categoria, List<ItemPedido> itemPedido) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,7 +43,13 @@ public class Produto {
 		this.qtdEstoque = qtdEstoque;
 		this.dataCadastro = dataCadastro;
 		this.valorUnitario = valorUnitario;
+		this.url = url;
 		this.categoria = categoria;
+		this.itemPedido = itemPedido;
+	}
+
+	public Produto() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -102,6 +106,22 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
 	@Override

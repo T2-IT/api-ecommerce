@@ -50,7 +50,7 @@ public class Cliente {
     @Column(name = "data_nasc")
     private LocalDate dataNasc;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
@@ -152,6 +152,8 @@ public class Cliente {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+    
+    
 
     @Override
     public int hashCode() {

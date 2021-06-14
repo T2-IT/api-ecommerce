@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.org.serratec.projetoecommerce.dto.ClienteDTO;
-import br.org.serratec.projetoecommerce.exception.ClinteException;
+import br.org.serratec.projetoecommerce.exception.ClienteException;
 import br.org.serratec.projetoecommerce.exception.EmailException;
 import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.repository.ClienteRepository;
@@ -24,23 +24,17 @@ public class ClienteService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	public ResponseEntity<Cliente> inserir(Cliente cliente){
+	public ResponseEntity<Cliente> inserir(Cliente cliente) throws ClienteException, EmailException {
 		Cliente clienteEmail = clienteRepository.findByEmail(cliente.getEmail());
 		Cliente clienteCPF = clienteRepository.findByCpf(cliente.getCpf());
 		
-		try {
 			if (clienteEmail != null)
 				throw new EmailException("E-mail já cadastrado!");
 			
 			if (clienteCPF != null)
-				throw new ClinteException("CPF já cadastrado!");
+				throw new ClienteException("CPF já cadastrado!");
 				
 			clienteRepository.save(cliente);
-		} catch (ClinteException e) {
-			e.getMessage();
-		} catch (EmailException e) {
-			e.getMessage();
-		}
 		return ResponseEntity.ok(cliente);
 	}
 

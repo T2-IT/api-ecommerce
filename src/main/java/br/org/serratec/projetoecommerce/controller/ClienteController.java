@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.projetoecommerce.dto.ClienteDTO;
+import br.org.serratec.projetoecommerce.exception.ClienteException;
+import br.org.serratec.projetoecommerce.exception.EmailException;
 import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.repository.ClienteRepository;
 import br.org.serratec.projetoecommerce.service.ClienteService;
@@ -32,9 +34,6 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @Autowired
-    private ClienteRepository clienteRepository;
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Insere dados de um cliente", notes = "Inserir cliente")
@@ -43,7 +42,7 @@ public class ClienteController {
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceçãooo") })
-    public ResponseEntity<Cliente> inserir(@Valid @RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> inserir(@Valid @RequestBody Cliente cliente) throws EmailException, ClienteException {
         return clienteService.inserir(cliente);
     }
 
