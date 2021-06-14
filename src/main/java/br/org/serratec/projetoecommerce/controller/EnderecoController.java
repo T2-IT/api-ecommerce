@@ -32,12 +32,12 @@ public class EnderecoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public EnderecoDTO inserir(@Valid @RequestBody Endereco endereco) {
+	public Endereco inserir(@Valid @RequestBody Endereco endereco) {
 		return enderecoService.inserir(endereco);
 	}
 
 	@GetMapping("{cep}")
-	public EnderecoDTO buscar(@PathVariable String cep) {
+	public Endereco buscar(@PathVariable String cep) {
 		return enderecoService.buscar(cep);
 	}
 
