@@ -7,34 +7,34 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 @Configuration
 public class MailConfig {
-    
-    @Autowired
-    private JavaMailSender javaMailSender;
 
-    public void confirmacaoCadastroCliente(String para, String assunto, String texto) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("tdois.it@gmail.com");
-        simpleMailMessage.setTo(para);
-        simpleMailMessage.setSubject(assunto);
-        simpleMailMessage.setText("");
-        javaMailSender.send(simpleMailMessage);
-    }
+	@Autowired
+	private JavaMailSender javaMailSender;
 
-    public void exclusaoCadastroCliente(String para, String assunto, String texto) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("tdois.it@gmail.com");
-        simpleMailMessage.setTo(para);
-        simpleMailMessage.setSubject(assunto);
-        simpleMailMessage.setText("");
-        javaMailSender.send(simpleMailMessage);
-    }
+	public void confirmacaoCadastroCliente(String para, String assunto, String texto) {
+		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage.setFrom("tdois.it@gmail.com");
+		simpleMailMessage.setTo(para);
+		simpleMailMessage.setSubject(assunto);
+		simpleMailMessage.setText("");
+		javaMailSender.send(simpleMailMessage);
+	}
 
-    public void confirmacaoCompra(String para, String assunto, String texto) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("tdois.it@gmail.com");
-        simpleMailMessage.setTo(para);
-        simpleMailMessage.setSubject(assunto);
-        simpleMailMessage.setText("");
-        javaMailSender.send(simpleMailMessage);
-    }
+	public void exclusaoCadastroCliente(String para, String assunto, String texto) {
+		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage.setFrom("tdois.it@gmail.com");
+		simpleMailMessage.setTo(para);
+		simpleMailMessage.setSubject(assunto);
+		simpleMailMessage.setText("");
+		javaMailSender.send(simpleMailMessage);
+	}
+
+	public void finalizarPedido(String para, String assunto, String texto) {
+		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage.setFrom("tdois.it@gmail.com");
+		simpleMailMessage.setTo(para);
+		simpleMailMessage.setSubject(assunto);
+		simpleMailMessage.setText(texto);
+		javaMailSender.send(simpleMailMessage);
+	}
 }

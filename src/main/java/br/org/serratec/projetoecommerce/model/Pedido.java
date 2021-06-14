@@ -29,10 +29,10 @@ public class Pedido {
 
 	@Column(name = "data_envio")
 	private LocalDate dataEnvio;
-	
+
 	@Transient
 	private Double totalGeral;
-	
+
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itemPedido;
 
@@ -40,16 +40,22 @@ public class Pedido {
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
+	private StatusPedido statusPedido;
+
 	public Pedido() {
 	}
 
-	public Pedido(Long id, LocalDate dataPedido, LocalDate dataEntrega, LocalDate dataEnvio, Cliente cliente) {
+	public Pedido(Long id, LocalDate dataPedido, LocalDate dataEntrega, LocalDate dataEnvio, Double totalGeral,
+			List<ItemPedido> itemPedido, Cliente cliente, StatusPedido statusPedido) {
 		super();
 		this.id = id;
 		this.dataPedido = dataPedido;
 		this.dataEntrega = dataEntrega;
 		this.dataEnvio = dataEnvio;
+		this.totalGeral = totalGeral;
+		this.itemPedido = itemPedido;
 		this.cliente = cliente;
+		this.statusPedido = statusPedido;
 	}
 
 	public Long getId() {
@@ -98,6 +104,22 @@ public class Pedido {
 
 	public void setTotalGeral(Double totalGeral) {
 		this.totalGeral = totalGeral;
+	}
+
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
+	}
+
+	public StatusPedido getStatusPedido() {
+		return statusPedido;
+	}
+
+	public void setStatusPedido(StatusPedido statusPedido) {
+		this.statusPedido = statusPedido;
 	}
 
 	@Override
