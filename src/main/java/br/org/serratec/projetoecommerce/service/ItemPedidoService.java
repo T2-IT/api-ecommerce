@@ -1,6 +1,5 @@
 package br.org.serratec.projetoecommerce.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

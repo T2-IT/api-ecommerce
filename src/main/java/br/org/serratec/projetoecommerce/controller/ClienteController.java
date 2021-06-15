@@ -21,7 +21,6 @@ import br.org.serratec.projetoecommerce.dto.ClienteDTO;
 import br.org.serratec.projetoecommerce.exception.ClienteException;
 import br.org.serratec.projetoecommerce.exception.EmailException;
 import br.org.serratec.projetoecommerce.model.Cliente;
-import br.org.serratec.projetoecommerce.repository.ClienteRepository;
 import br.org.serratec.projetoecommerce.service.ClienteService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -36,57 +35,67 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation(value = "Insere dados de um cliente", notes = "Inserir cliente")
-    @ApiResponses(value = { @ApiResponse(code = 201, message = "Cliente cadastrado com sucesso"),
+    @ApiOperation(value = "Insere os dados de um cliente", notes = "Cadastrar Cliente")
+    @ApiResponses(value = { 
+            @ApiResponse(code = 201, message = "Cliente cadastrado"),
             @ApiResponse(code = 401, message = "Erro de Autenticação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 505, message = "Quando ocorre uma exceçãooo") })
+            @ApiResponse(code = 505, message = "Quando ocorre uma exceção")
+        })
     public ResponseEntity<Cliente> inserir(@Valid @RequestBody Cliente cliente) throws EmailException, ClienteException {
         return clienteService.inserir(cliente);
     }
 
-
     @GetMapping("{id}")
-    @ApiOperation(value = "Retorna um cliente", notes = "Cliente")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna um cliente"),
+    @ApiOperation(value = "Retorna os dados de um cliente", notes = "Buscar Cliente")
+    @ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "Cliente encontrado"),
             @ApiResponse(code = 401, message = "Erro de Autenticação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
+            @ApiResponse(code = 505, message = "Quando ocorre uma exceção") 
+        })
     public ResponseEntity<ClienteDTO> buscar(@PathVariable Long id) {
         return clienteService.buscar(id);
     }
 
     @GetMapping
-    @ApiOperation(value = "Lista todos os clientes ", notes = "Listagem de  clientes")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna todos os  clientes"),
+    @ApiOperation(value = "Retorna os dados de todos os clientes", notes = "Listar Clientes")
+    @ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "Clientes encontrados"),
             @ApiResponse(code = 401, message = "Erro de Autenticação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
+            @ApiResponse(code = 505, message = "Quando ocorre uma exceção") 
+        })
     public ResponseEntity<List<ClienteDTO>> listar() {
         return clienteService.listar();
     }
 
     @PutMapping("{id}")
-    @ApiOperation(value = "Atualiza dados de um  cliente", notes = "Atualizar  cliente")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = " cliente atualizado"),
+    @ApiOperation(value = "Atualiza os dados de um cliente", notes = "Atualizar Cliente")
+    @ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "Cliente atualizado"),
+            @ApiResponse(code = 201, message = "Cliente cadastrado"),
             @ApiResponse(code = 401, message = "Erro de Autenticação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
+            @ApiResponse(code = 505, message = "Quando ocorre uma exceção") 
+        })
     public ResponseEntity<Cliente> atualizar(@Valid @RequestBody Cliente cliente, @PathVariable Long id) {
         return clienteService.atualizar(cliente, id);
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation(value = "Remove um  cliente", notes = "Remover  cliente")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Dependente removido"),
+    @ApiOperation(value = "Remove os dados de um cliente", notes = "Remover Cliente")
+    @ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "Cliente removido"),
             @ApiResponse(code = 401, message = "Erro de Autenticação"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
+            @ApiResponse(code = 505, message = "Quando ocorre uma exceção")
+        })
     public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
         return clienteService.excluir(id);
     }

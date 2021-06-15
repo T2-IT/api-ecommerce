@@ -1,9 +1,7 @@
 package br.org.serratec.projetoecommerce.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,24 +9,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
+	@ApiModelProperty(value = "Identificador único do produto")
 	private Long id;
+
+	@ApiModelProperty(value = "Nome do produto", required = true)
 	private String nome;
+	
+	@ApiModelProperty(value = "Descrição do produto")
 	private String descricao;
+	
 	@Column(name = "qtd_estoque")
+	@ApiModelProperty(value = "Quantidade do produto em estoque", required = true)
 	private Integer qtdEstoque;
+	
 	@Column(name = "data_cadastro")
+	@ApiModelProperty(value = "Data de cadastro do produto", required = true)
 	private LocalDate dataCadastro;
+	
 	@Column(name = "valor_unitario")
+	@ApiModelProperty(value = "Valor do produto", required = true)
 	private Double valorUnitario;
+	
 	private String url;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
@@ -52,7 +63,7 @@ public class Produto {
 	}
 
 	public Produto() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Long getId() {

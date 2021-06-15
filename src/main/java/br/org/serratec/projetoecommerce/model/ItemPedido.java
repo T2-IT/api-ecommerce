@@ -7,10 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "item_pedido")
@@ -19,12 +19,16 @@ public class ItemPedido {
 	@Id
 	@GeneratedValue
 	@Column(name = "id_item_produto")
+	@ApiModelProperty(value = "Identificador único do item do pedido")
 	private Long id;
 
+	@ApiModelProperty(value = "Quantidade do item do pedido", required = true)
 	private Double quantidade;
 
+	@ApiModelProperty(value = "Valor do item do pedido", required = true)
 	private Double precoVenda;
 
+	@ApiModelProperty(value = "Valor vezes quantidade do item do pedido", required = true)
 	private Double subTotal;
 
 	@ManyToOne

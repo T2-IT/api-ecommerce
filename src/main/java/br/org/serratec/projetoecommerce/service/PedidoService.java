@@ -1,13 +1,10 @@
 package br.org.serratec.projetoecommerce.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.org.serratec.projetoecommerce.config.MailConfig;
-import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.model.Pedido;
 import br.org.serratec.projetoecommerce.model.StatusPedido;
 import br.org.serratec.projetoecommerce.repository.PedidoRepository;

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.model.Foto;
 import br.org.serratec.projetoecommerce.model.Produto;
 import br.org.serratec.projetoecommerce.repository.FotoRepository;

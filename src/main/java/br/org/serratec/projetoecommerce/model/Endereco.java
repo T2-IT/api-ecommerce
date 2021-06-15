@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Endereco {
@@ -14,33 +14,30 @@ public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_endereco")
+	@ApiModelProperty(value = "Identificador único do endereço")
 	private Long id;
 
-	// @NotBlank(message = "Preencha o CEP")
-	// @Size(max = 9)
+	@ApiModelProperty(value = "CEP endereço", required = true)
 	private String cep;
 
-	// @NotBlank(message = "Preencha o logradouro")
-	// @Size(max = 100)
 	@Column(name = "rua")
+	@ApiModelProperty(value = "Logradouro endereço", required = true)
 	private String logradouro;
 
+	@ApiModelProperty(value = "Número endereço", required = true)
 	private Integer numero;
 
-	// @Size(max = 20)
+	@ApiModelProperty(value = "Complemento endereço")
 	private String complemento;
 
-	// @NotBlank(message = "Preencha o bairro")
-	// @Size(max = 50)
+	@ApiModelProperty(value = "Bairro endereço", required = true)
 	private String bairro;
 
-	// @NotBlank(message = "Preencha a cidade")
-	// @Size(max = 30)
+	@ApiModelProperty(value = "Cidade endereço", required = true)
 	private String localidade;
 
-	// @NotBlank(message = "Preencha a UF")
-	// @Size(max = 2)
 	@Column(name = "estado")
+	@ApiModelProperty(value = "Estado endereço", required = true)
 	private String uf;
 
 	public Endereco() {

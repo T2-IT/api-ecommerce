@@ -1,15 +1,24 @@
 package br.org.serratec.projetoecommerce.dto;
 
-import java.util.Optional;
-
 import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.model.Endereco;
+import io.swagger.annotations.ApiModelProperty;
 
 public class ClienteDTO {
+
+	@ApiModelProperty(value = "Identificador único do cliente")
 	private Long id;
+
+	@ApiModelProperty(value = "Email do cliente", required = true)
 	private String email;
+
+	@ApiModelProperty(value = "Nome completo do cliente", required = true)
 	private String nomeCompleto;
+
+	@ApiModelProperty(value = "Telefone do cliente", required = true)
 	private String telefone;
+
+	@ApiModelProperty(value = "Endereço do cliente")
 	private Endereco endereco;
 
 	public ClienteDTO() {

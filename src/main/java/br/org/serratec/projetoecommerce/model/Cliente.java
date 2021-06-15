@@ -3,7 +3,6 @@ package br.org.serratec.projetoecommerce.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,11 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import org.hibernate.validator.constraints.br.CPF;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Cliente {
@@ -24,35 +27,33 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
+	@ApiModelProperty(value = "Identificador único do cliente")
 	private Long id;
 
-	// @NotBlank(message = "Digite o e-mail")
-	@Size(max = 30)
+	@Email(message = "Email inválido")
+	@ApiModelProperty(value = "Email do cliente", required = true)
 	private String email;
 
-	// @NotBlank(message = "Digite o nome de usuário. Tamanho máximo: 20
-	// caracteres")
-	// @Size(max = 20)
 	@Column(name = "nome_usuario")
+	@ApiModelProperty(value = "Nome de usuário do cliente", required = true)
 	private String usuario;
 
-	// @NotBlank(message = "Digite seu nome completo. Tamanho máximo: 60
-	// caracteres")
-	// @Size(max = 60)
 	@Column(name = "nome_completo")
+	@ApiModelProperty(value = "Nome completo do cliente", required = true)
 	private String nomeCompleto;
 
-	// @NotBlank(message = "Digite a senha")
+	@ApiModelProperty(value = "Senha de acesso do cliente", required = true)
 	private String senha;
 
-	// @NotBlank(message = "Digite o CPF sem pontos, traço e espaços")
-	@Size(max = 14)
+	@CPF(message = "CPF inválido")
+	@ApiModelProperty(value = "CPF do cliente", required = true)
 	private String cpf;
 
-	// @Size(max = 11)
+	@ApiModelProperty(value = "Telefone do cliente", required = true)
 	private String telefone;
 
 	@Column(name = "data_nasc")
+	@ApiModelProperty(value = "Data de nascimento do cliente", required = true)
 	private LocalDate dataNasc;
 
 	@OneToOne()

@@ -19,24 +19,31 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido")
+	@ApiModelProperty(value = "Identificador único do pedido")
 	private Long id;
 
 	@Column(name = "data_pedido")
+	@ApiModelProperty(value = "Data do pedido")
 	private LocalDate dataPedido;
 
 	@Column(name = "data_entrega")
+	@ApiModelProperty(value = "Data de entrega do pedido")
 	private LocalDate dataEntrega;
 
 	@Column(name = "data_envio")
+	@ApiModelProperty(value = "Data de envio do pedido")
 	private LocalDate dataEnvio;
 
 	@Transient
+	@ApiModelProperty(value = "Total geral do pedido")
 	private Double totalGeral;
 
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
