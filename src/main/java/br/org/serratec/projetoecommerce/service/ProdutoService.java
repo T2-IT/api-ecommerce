@@ -33,10 +33,9 @@ public class ProdutoService {
 				.buildAndExpand(produto.getId()).toUri();
 
 		System.out.println("URI" + uri);
-		Produto produtos = new Produto();
-		produtos.setNome(produtos.getNome());
-		produtos.setUrl(uri.toString());
-		return produtos;
+		produto.setNome(produto.getNome());
+		produto.setUrl(uri.toString());
+		return produto;
 	}
 
 	public ResponseEntity<Produto> buscar(Long id) {

@@ -46,20 +46,6 @@ public class ClienteController {
         return clienteService.inserir(cliente);
     }
 
-    // @PostMapping("/inserirTodos")
-    // @ApiOperation(value = "Insere dados de vários clientes", notes = "Inserir
-    // clientes")
-    // @ApiResponses(value = { @ApiResponse(code = 201, message = "Clientes
-    // cadastrados com sucesso"),
-    // @ApiResponse(code = 401, message = "Erro de Autenticação"),
-    // @ApiResponse(code = 403, message = "Você não tem permissão para acessar o
-    // recurso"),
-    // @ApiResponse(code = 404, message = "Recurso não encontrado"),
-    // @ApiResponse(code = 505, message = "Quando ocorre uma exceção") })
-    // @ResponseStatus(HttpStatus.CREATED)
-    // public List<Cliente> inserirTodos(List<Cliente> clientes) {
-    // return clienteRepository.saveAll(clientes);
-    // }
 
     @GetMapping("{id}")
     @ApiOperation(value = "Retorna um cliente", notes = "Cliente")

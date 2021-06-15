@@ -1,10 +1,13 @@
 package br.org.serratec.projetoecommerce.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pedido {
@@ -33,11 +39,13 @@ public class Pedido {
 	@Transient
 	private Double totalGeral;
 
-	@OneToMany(mappedBy = "pedido")
-	private List<ItemPedido> itemPedido;
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonManagedReference
+	private List<ItemPedido> itemPedido = new ArrayList<ItemPedido>();
 
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
+	@JsonBackReference
 	private Cliente cliente;
 
 	private StatusPedido statusPedido;
@@ -98,8 +106,13 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
+	@Transient
 	public Double getTotalGeral() {
-		return totalGeral;
+		double soma = 0;
+		for (ItemPedido item : itemPedido) {
+			soma += item.getSubTotal();
+		}
+		return soma;
 	}
 
 	public void setTotalGeral(Double totalGeral) {

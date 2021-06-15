@@ -36,12 +36,12 @@ public class PedidoService {
 	public ResponseEntity<Pedido> finalizarPedido(Long id) {
 		Pedido pedido = pedidoRepository.getById(id);
 		if (pedido != null) {
-			Cliente cliente = new Cliente();
 			pedido.setStatusPedido(StatusPedido.FINALIZADO);
 			pedidoRepository.save(pedido);
-			mailConfig.finalizarPedido(cliente.getEmail(), "Pedido finalizado \nn° pedido:" + pedido.getId(),
+			mailConfig.finalizarPedido(pedido.getCliente().getEmail(),
+					"Pedido finalizado \nn° pedido:" + pedido.getId(),
 					"data envio:" + pedido.getDataEnvio() + "\ndata entrega: " + pedido.getDataEntrega()
-							+ "\nprodutos: " + pedido.getItemPedido() + "total geral: " + pedido.getTotalGeral());
+							+ "\nprodutos: " + pedido.getItemPedido() + "total geral: ");
 			return ResponseEntity.noContent().build();
 		} else {
 			return ResponseEntity.notFound().build();

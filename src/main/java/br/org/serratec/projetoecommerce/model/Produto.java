@@ -3,12 +3,14 @@ package br.org.serratec.projetoecommerce.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,17 +27,19 @@ public class Produto {
 	@Column(name = "data_cadastro")
 	private LocalDate dataCadastro;
 	@Column(name = "valor_unitario")
-	private Float valorUnitario;
+	private Double valorUnitario;
 	private String url;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 
-	@OneToMany(mappedBy = "produto")
-	private List<ItemPedido> itemPedido;
+	@Override
+	public String toString() {
+		return "Produto [nome=" + nome + "]";
+	}
 
 	public Produto(Long id, String nome, String descricao, Integer qtdEstoque, LocalDate dataCadastro,
-			Float valorUnitario, String url, Categoria categoria, List<ItemPedido> itemPedido) {
+			Double valorUnitario, String url, Categoria categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,7 +49,6 @@ public class Produto {
 		this.valorUnitario = valorUnitario;
 		this.url = url;
 		this.categoria = categoria;
-		this.itemPedido = itemPedido;
 	}
 
 	public Produto() {
@@ -92,11 +95,11 @@ public class Produto {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public Float getValorUnitario() {
+	public Double getValorUnitario() {
 		return valorUnitario;
 	}
 
-	public void setValorUnitario(Float valorUnitario) {
+	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
 
@@ -114,14 +117,6 @@ public class Produto {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public List<ItemPedido> getItemPedido() {
-		return itemPedido;
-	}
-
-	public void setItemPedido(List<ItemPedido> itemPedido) {
-		this.itemPedido = itemPedido;
 	}
 
 	@Override
