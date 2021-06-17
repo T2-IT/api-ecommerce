@@ -10,24 +10,19 @@ A proposta do projeto é a criação de uma API RESTful para ser usada em um e-c
 
 Aqui estão as tecnologias usadas neste projeto
 
-- Git
 - Java 8
-  - Spring Boot 2.5.0
-- REST
-- SQL
+- Spring Boot 2.5.0
+- PostgreSQL
+- Swagger
 
 ## Serviços Utilizados
  
-- Eclipse IDE
 - GitHub
-- PostgreSQL
-- Swagger
-- VS Code
 
 ## Links
 
-- Repositório: [GitHub]()
-- Documentação da API: [Swagger]()
+- Repositório: [GitHub](https://github.com/T2-IT/api-ecommerce)
+- Documentação da API: [Swagger](https://residencia-ecommerce.herokuapp.com/swagger-ui/index.html#)
 
 
 <p align="center">
