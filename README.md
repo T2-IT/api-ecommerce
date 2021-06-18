@@ -4,7 +4,7 @@
 
 Projeto Final para a disciplina de API REST, ministrada pelo Prof. [Roni Schanuel](https://github.com/roni-info) durante a Residência de Software organizada pelo SERRATEC.
 
-A proposta do projeto é a criação de uma API RESTful para ser usada em um e-commerce, atendo os requisitos solicitados.
+A proposta do projeto é a criação de uma API RESTful para ser usada em um e-commerce, atendendo os requisitos solicitados.
 
 ## Tecnologias
 
