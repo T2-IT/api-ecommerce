@@ -38,7 +38,7 @@ public class PedidoService {
 			mailConfig.finalizarPedido(pedido.getCliente().getEmail(),
 					"Pedido finalizado \nn° pedido:" + pedido.getId(),
 					"data envio:" + pedido.getDataEnvio() + "\ndata entrega: " + pedido.getDataEntrega()
-							+ "\nprodutos: " + pedido.getItemPedido() + "total geral: ");
+							+ "\nprodutos: " + pedido.getItemPedido());
 			return ResponseEntity.noContent().build();
 		} else {
 			return ResponseEntity.notFound().build();
