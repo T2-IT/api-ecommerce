@@ -33,6 +33,7 @@ public class Endereco {
 	@ApiModelProperty(value = "Bairro endereço", required = true)
 	private String bairro;
 
+	@Column(name = "cidade")
 	@ApiModelProperty(value = "Cidade endereço", required = true)
 	private String localidade;
 
