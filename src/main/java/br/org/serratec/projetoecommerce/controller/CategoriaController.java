@@ -42,20 +42,6 @@ public class CategoriaController {
 		return categoriaService.inserir(categoria);
 	}
 
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	@ApiOperation(value = "Insere os dados de várias categorias", notes = "Cadastrar Categorias")
-	@ApiResponses(value = { 
-			@ApiResponse(code = 201, message = "Categorias cadastradas"),
-			@ApiResponse(code = 401, message = "Erro de autenticação"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar o recurso"),
-			@ApiResponse(code = 404, message = "Recurso não encontrado"),
-			@ApiResponse(code = 505, message = "Quando ocorre uma exceção")
-		})
-	public List<Categoria> inserirTodos(@RequestBody List<Categoria> categorias) {
-		return categoriaService.inserirTodos(categorias);
-	}
-
 	@GetMapping
 	@ApiOperation(value = "Retorna os dados de todas as categorias", notes = "Listar Categorias")
 	@ApiResponses(value = { 

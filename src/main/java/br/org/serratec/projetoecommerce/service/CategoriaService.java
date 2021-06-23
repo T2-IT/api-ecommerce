@@ -19,10 +19,6 @@ public class CategoriaService {
 	public Categoria inserir(Categoria categoria) {
 		return categoriaRepository.save(categoria);
 	}
-
-	public List<Categoria> inserirTodos(List<Categoria> categorias) {
-		return categoriaRepository.saveAll(categorias);
-	}
 	
 	public ResponseEntity<List<Categoria>> listar() {
 		List<Categoria> categoria = categoriaRepository.findAll();
