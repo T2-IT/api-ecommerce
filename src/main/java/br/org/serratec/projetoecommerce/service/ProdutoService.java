@@ -29,8 +29,7 @@ public class ProdutoService {
 	}
 
 	public Produto adicionarFotoUrl(Produto produto) {
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/{id}/foto")
-				.buildAndExpand(produto.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/{id}/foto").buildAndExpand(produto.getId()).toUri();
 
 		System.out.println("URI" + uri);
 		produto.setNome(produto.getNome());
