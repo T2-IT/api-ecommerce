@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 // alterar
 @RestController
 @RequestMapping("/produto")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://ecommerce-tdois.herokuapp.com")
 public class ProdutoController {
 
 	@Autowired

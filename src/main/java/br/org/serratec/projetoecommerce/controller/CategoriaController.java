@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiResponses;
 // alterar
 @RestController
 @RequestMapping("/categoria")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://ecommerce-tdois.herokuapp.com")
 public class CategoriaController {
 
 	@Autowired
