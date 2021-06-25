@@ -68,9 +68,7 @@ public class Cliente {
 	public Cliente() {
 	}
 
-	public Cliente(Long id, @NotBlank(message = "Digite o e-mail") @Size(max = 30) String email,
-			@NotBlank(message = "Digite o nome de usuário. Tamanho máximo: 20 caracteres") @Size(max = 20) String usuario,
-			String nomeCompleto, String senha, String cpf, String telefone, LocalDate dataNasc) {
+	public Cliente(Long id, String email, String usuario, String nomeCompleto, String senha, String cpf, String telefone, LocalDate dataNasc) {
 		this.id = id;
 		this.email = email;
 		this.usuario = usuario;
