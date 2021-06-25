@@ -9,6 +9,7 @@ import br.org.serratec.projetoecommerce.model.Pedido;
 import br.org.serratec.projetoecommerce.model.StatusPedido;
 import br.org.serratec.projetoecommerce.repository.PedidoRepository;
 
+// alterar
 @Service
 public class PedidoService {
 

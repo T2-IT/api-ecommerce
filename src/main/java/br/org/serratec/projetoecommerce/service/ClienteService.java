@@ -13,14 +13,12 @@ import br.org.serratec.projetoecommerce.exception.EmailException;
 import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.repository.ClienteRepository;
 
+// alterar
 @Service
 public class ClienteService {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-
-	// @Autowired
-	// private BCryptPasswordEncoder passwordEncoder;
 
 	public ResponseEntity<Cliente> inserir(Cliente cliente) throws ClienteException, EmailException {
 		Cliente clienteEmail = clienteRepository.findByEmail(cliente.getEmail());

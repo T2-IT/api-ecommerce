@@ -21,6 +21,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import io.swagger.annotations.ApiModelProperty;
 
+// alterar
 @Entity
 public class Cliente {
 

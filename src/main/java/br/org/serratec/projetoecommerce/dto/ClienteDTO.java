@@ -4,6 +4,7 @@ import br.org.serratec.projetoecommerce.model.Cliente;
 import br.org.serratec.projetoecommerce.model.Endereco;
 import io.swagger.annotations.ApiModelProperty;
 
+// alterar
 public class ClienteDTO {
 
 	@ApiModelProperty(value = "Identificador único do cliente")

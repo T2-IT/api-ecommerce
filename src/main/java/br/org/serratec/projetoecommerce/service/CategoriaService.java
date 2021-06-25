@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.org.serratec.projetoecommerce.model.Categoria;
 import br.org.serratec.projetoecommerce.repository.CategoriaRepository;
 
+// alterar
 @Service
 public class CategoriaService {
 

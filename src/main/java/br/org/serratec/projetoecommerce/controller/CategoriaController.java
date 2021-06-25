@@ -21,7 +21,7 @@ import br.org.serratec.projetoecommerce.service.CategoriaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-
+// alterar
 @RestController
 @RequestMapping("/categoria")
 @CrossOrigin(origins = "http://localhost:3000")

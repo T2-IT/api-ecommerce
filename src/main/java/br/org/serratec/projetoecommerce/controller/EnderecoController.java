@@ -22,6 +22,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+// alterar
 @RestController
 @RequestMapping("/enderecos")
 @CrossOrigin(origins = "http://localhost:3000")

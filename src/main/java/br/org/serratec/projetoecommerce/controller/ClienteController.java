@@ -27,6 +27,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+// alterar
 @RestController
 @RequestMapping("/clientes")
 @CrossOrigin(origins = "http://localhost:3000")

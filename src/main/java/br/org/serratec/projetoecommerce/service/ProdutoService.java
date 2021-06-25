@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.org.serratec.projetoecommerce.model.Produto;
 import br.org.serratec.projetoecommerce.repository.ProdutoRepository;
 
+// alterar
 @Service
 public class ProdutoService {
 
