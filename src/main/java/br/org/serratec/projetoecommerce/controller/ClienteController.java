@@ -71,7 +71,7 @@ public class ClienteController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 505, message = "Quando ocorre uma exceção") 
         })
-    public ResponseEntity<List<ClienteDTO>> listar() {
+    public ResponseEntity<List<Cliente>> listar() {
         return clienteService.listar();
     }
 

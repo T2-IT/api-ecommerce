@@ -27,14 +27,14 @@ public class ClienteService {
 	public ResponseEntity<Cliente> inserir(Cliente cliente) throws ClienteException, EmailException {
 		Cliente clienteEmail = clienteRepository.findByEmail(cliente.getEmail());
 		Cliente clienteCPF = clienteRepository.findByCpf(cliente.getCpf());
-		
-			if (clienteEmail != null)
-				throw new EmailException("E-mail já cadastrado!");
-			
-			if (clienteCPF != null)
-				throw new ClienteException("CPF já cadastrado!");
-				
-			clienteRepository.save(cliente);
+
+		if (clienteEmail != null)
+			throw new EmailException("E-mail já cadastrado!");
+
+		if (clienteCPF != null)
+			throw new ClienteException("CPF já cadastrado!");
+
+		clienteRepository.save(cliente);
 		return ResponseEntity.ok(cliente);
 	}
 
@@ -42,23 +42,17 @@ public class ClienteService {
 		Optional<Cliente> cliente = clienteRepository.findById(id);
 		Cliente cliente1 = cliente.get();
 		ClienteDTO clienteDTO = new ClienteDTO(cliente1);
-		
+
 		if (cliente.isPresent())
 			return ResponseEntity.ok(clienteDTO);
 		else
 			return null;
 	}
 
-	public ResponseEntity<List<ClienteDTO>> listar() {
+	public ResponseEntity<List<Cliente>> listar() {
 		List<Cliente> clientes = clienteRepository.findAll();
-		List<ClienteDTO> clientesDTO = new ArrayList<ClienteDTO>();
 
-		for (Cliente cliente : clientes) {
-			ClienteDTO dto = new ClienteDTO();
-			clientesDTO.add(dto);
-		}
-
-		return ResponseEntity.ok(clientesDTO);
+		return ResponseEntity.ok(clientes);
 	}
 
 	public ResponseEntity<Cliente> atualizar(Cliente cliente, Long id) {
