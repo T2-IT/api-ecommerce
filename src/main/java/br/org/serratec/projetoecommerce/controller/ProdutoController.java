@@ -41,11 +41,11 @@ public class ProdutoController {
 			@ApiResponse(code = 404, message = "Recurso não encontrado"),
 			@ApiResponse(code = 505, message = "Quando ocorre uma exceção") 
 		})
-	public Produto inserir(@RequestPart Produto produto, @RequestParam MultipartFile file) throws IOException {
-		return produtoService.inserir(produto, file);
+	public ResponseEntity<Produto> inserir(@RequestPart Produto produto) throws IOException {
+		return produtoService.inserir(produto);
 	}
 
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	@ApiOperation(value = "Retorna os dados de um produto", notes = "Buscar Produto")
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Produto encontrado"),
@@ -71,7 +71,7 @@ public class ProdutoController {
 		return produtoService.listar();
 	}
 
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	@ApiOperation(value = "Atualiza os dados de um produto", notes = "Atualizar Produto")
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Produto atualizado"),
@@ -85,7 +85,7 @@ public class ProdutoController {
 		return produtoService.atualizar(id, produto);
 	}
 
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Remove os dados de um produto", notes = "Remover Produto")
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "Produto removido"),

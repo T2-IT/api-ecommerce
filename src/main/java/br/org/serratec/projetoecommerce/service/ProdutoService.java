@@ -20,22 +20,26 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
-	@Autowired
-	private FotoService fotoService;
+	// @Autowired
+	// private FotoService fotoService;
 
-	public Produto inserir(Produto produto, MultipartFile file) throws IOException {
-		fotoService.inserir(produto, file);
-		return adicionarFotoUrl(produto);
+	public ResponseEntity<Produto> inserir(Produto produto) {
+		produtoRepository.save(produto);
+		return ResponseEntity.ok(produto);
 	}
+	// public Produto inserir(Produto produto, MultipartFile file) throws IOException {
+	// 	fotoService.inserir(produto, file);
+	// 	return adicionarFotoUrl(produto);
+	// }
 
-	public Produto adicionarFotoUrl(Produto produto) {
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/{id}/foto").buildAndExpand(produto.getId()).toUri();
+	// public Produto adicionarFotoUrl(Produto produto) {
+	// 	URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/{id}/foto").buildAndExpand(produto.getId()).toUri();
 
-		System.out.println("URI" + uri);
-		produto.setNome(produto.getNome());
-		produto.setUrl(uri.toString());
-		return produto;
-	}
+	// 	System.out.println("URI" + uri);
+	// 	produto.setNome(produto.getNome());
+	// 	produto.setUrl(uri.toString());
+	// 	return produto;
+	// }
 
 	public ResponseEntity<Produto> buscar(Long id) {
 		Optional<Produto> produto = produtoRepository.findById(id);
