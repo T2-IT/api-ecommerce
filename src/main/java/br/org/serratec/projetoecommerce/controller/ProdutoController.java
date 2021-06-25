@@ -12,17 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.org.serratec.projetoecommerce.model.Produto;
 import br.org.serratec.projetoecommerce.service.ProdutoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/produto")
@@ -41,7 +39,7 @@ public class ProdutoController {
 			@ApiResponse(code = 404, message = "Recurso não encontrado"),
 			@ApiResponse(code = 505, message = "Quando ocorre uma exceção") 
 		})
-	public ResponseEntity<Produto> inserir(@RequestPart Produto produto) throws IOException {
+	public Produto inserir(@RequestBody Produto produto) {
 		return produtoService.inserir(produto);
 	}
 
