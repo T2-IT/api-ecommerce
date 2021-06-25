@@ -20,15 +20,15 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-	public ResponseEntity<Cliente> inserir(Cliente cliente) throws ClienteException, EmailException {
+	public ResponseEntity<Cliente> inserir(Cliente cliente) throws EmailException {
 		Cliente clienteEmail = clienteRepository.findByEmail(cliente.getEmail());
-		Cliente clienteCPF = clienteRepository.findByCpf(cliente.getCpf());
+		// Cliente clienteCPF = clienteRepository.findByCpf(cliente.getCpf());
 
 		if (clienteEmail != null)
 			throw new EmailException("E-mail já cadastrado!");
 
-		if (clienteCPF != null)
-			throw new ClienteException("CPF já cadastrado!");
+		// if (clienteCPF != null)
+			// throw new ClienteException("CPF já cadastrado!");
 
 		clienteRepository.save(cliente);
 		return ResponseEntity.ok(cliente);

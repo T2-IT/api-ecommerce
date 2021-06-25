@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -65,10 +63,9 @@ public class Cliente {
 	@JsonManagedReference
 	private List<Pedido> pedidos;
 
-	public Cliente() {
-	}
-
-	public Cliente(Long id, String email, String usuario, String nomeCompleto, String senha, String cpf, String telefone, LocalDate dataNasc) {
+	public Cliente(Long id, @Email(message = "Email inválido") String email, String usuario, String nomeCompleto,
+			String senha, @CPF(message = "CPF inválido") String cpf, String telefone, LocalDate dataNasc,
+			Endereco endereco, List<Pedido> pedidos) {
 		this.id = id;
 		this.email = email;
 		this.usuario = usuario;
@@ -77,6 +74,11 @@ public class Cliente {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.dataNasc = dataNasc;
+		this.endereco = endereco;
+		this.pedidos = pedidos;
+	}
+
+	public Cliente() {
 	}
 
 	public Long getId() {
