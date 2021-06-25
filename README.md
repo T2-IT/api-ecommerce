@@ -13,11 +13,12 @@ Aqui estão as tecnologias usadas neste projeto
 - Java 8
 - Spring Boot 2.5.0
 - PostgreSQL
-- Swagger
 
 ## Serviços Utilizados
  
 - GitHub
+- Heroku
+- Swagger
 
 ## Links
 
